@@ -5,40 +5,41 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 2,
     borderColor: "#333",
-    borderRadius: 10,
-    margin: 10,
-    padding: 10,
+    borderRadius: 16,
+    margin: 16,
+    padding: 16,
     ...Platform.select({
       ios: {
         shadowColor: "#333",
         shadowOffset: {
-          width: 10,
-          height: 10,
+          width: 2,
+          height: 2,
         },
-        shadowRadius: 10,
-        shadowOpacity: 0.6,
+        shadowRadius: 4,
+        shadowOpacity: 0.3,
       },
       android: {
-        elevation: 10,
+        elevation: 5,
       },
     }),
   },
-  header: {
+  nameContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 10,
+    width: "100%",
+    marginBottom: 32,
   },
   name: {
     fontWeight: "bold",
     fontSize: 30,
   },
   hp: {
-    fontSize: 18,
+    fontSize: 22,
   },
   image: {
     width: "100%",
     height: 200,
+    marginBottom: 16,
     resizeMode: "contain",
     // Looks similar to object fit property of CSS
   },
@@ -56,11 +57,26 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 4,
   },
-  moves: {
-    marginVertical: 10,
+  typeEmoji: {
+    fontSize: 30,
+    marginRight: 12,
   },
-  movesContent: {
-    fontSize: 20,
+  typeText: {
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  movesContainer: {
+    marginBottom: 12,
+  },
+  movesText: {
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  weaknessContainer: {
+    marginBottom: 8,
+  },
+  weaknessText: {
+    fontSize: 22,
     fontWeight: "bold",
   },
 });
@@ -83,7 +99,7 @@ const getTypeDetails = (type) => {
 const PokemonCard = ({ name, image, type, hp, moves, weaknesses }) => {
   return (
     <View style={styles.card}>
-      <View style={styles.header}>
+      <View style={styles.nameContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.hp}>❤️{hp}</Text>
       </View>
@@ -92,6 +108,7 @@ const PokemonCard = ({ name, image, type, hp, moves, weaknesses }) => {
         source={image}
         style={styles.image}
         accessibilityLabel={`${name} pokemon`}
+        // resizeMode="contain"
       />
       <View style={styles.typeContainer}>
         <View
@@ -100,15 +117,15 @@ const PokemonCard = ({ name, image, type, hp, moves, weaknesses }) => {
             { borderColor: getTypeDetails(type).borderColor },
           ]}
         >
-          <Text>{getTypeDetails(type).emoji}</Text>
-          <Text>{type}</Text>
+          <Text style={styles.typeEmoji}>{getTypeDetails(type).emoji}</Text>
+          <Text style={styles.typeText}>{type}</Text>
         </View>
       </View>
-      <View style={styles.moves}>
-        <Text style={styles.movesContent}>Moves: {moves.join(", ")}</Text>
+      <View style={styles.movesContainer}>
+        <Text style={styles.movesText}>Moves: {moves.join(", ")}</Text>
       </View>
-      <View>
-        <Text style={styles.movesContent}>
+      <View style={styles.weaknessContainer}>
+        <Text style={styles.weaknessText}>
           Weakness: {weaknesses.join(", ")}
         </Text>
       </View>
