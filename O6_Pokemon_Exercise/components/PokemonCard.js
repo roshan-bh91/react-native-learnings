@@ -123,7 +123,7 @@ const PokemonCard = ({ name, image, type, hp, moves, weaknesses }) => {
       </View>
       <View style={styles.movesContainer}>
         <Text style={styles.movesText}>Moves: {moves.join(", ")}</Text>
-      </View>
+      </View> 
       <View style={styles.weaknessContainer}>
         <Text style={styles.weaknessText}>
           Weakness: {weaknesses.join(", ")}
